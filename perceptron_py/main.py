@@ -7,7 +7,7 @@ EPOCH = 5000
 
 
 def main():
-    decepticon = Perceptron(2, 3, 3, 1)
+    decepticon = Perceptron(2, 5, 4, 1)
     data = (
         (np.array([0.1, 0.1]), np.array([0.0])),
         (np.array([0.2, 0.4]), np.array([0.0])),
