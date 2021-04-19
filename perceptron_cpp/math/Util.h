@@ -16,7 +16,17 @@ inline auto sigmoid(T x) -> T {
 }
 
 
+template<typename T, size_t size>
+auto MSE(const Vector<T, size> &errorVector) -> T {
+    static_assert(is_float_or_double<T>);
+    T MSE_error = 0;
+    for (auto i = 0; i < size; ++i) {
+        MSE_error += std::pow(errorVector[i], 2);
 
+    }
+    return MSE_error;
+
+}
 
 
 template<typename T>

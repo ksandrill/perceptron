@@ -16,6 +16,8 @@ template<typename T, size_t N>
 class Vector : private std::array<T, N> {
 public:
     using std::array<T, N>::operator[];
+    using std::array<T, N>::begin;
+    using std::array<T, N>::end;
     explicit Vector(T item) {
         fill(item);
     };

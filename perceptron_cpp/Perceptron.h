@@ -11,7 +11,7 @@
 #include "math/Util.h"
 #include "random"
 
-namespace perceptronStaff {
+namespace perceptronStuff {
     constexpr auto ETA = 0.3;
 
     template<typename T, size_t prev_size, size_t cur_layer_size>
@@ -112,7 +112,7 @@ namespace perceptronStaff {
 
         }
 
-        void backProp(const Vector<T, output_layer_size> &target) {
+        auto backProp(const Vector<T, output_layer_size> &target)->T {
             auto error = outputLayerOutput - target;
             auto outputDeltaVector = calcOutputDelta(error, outputLayerOutput);
             auto outputWeightCor = calcLayerWeightCorr(outputDeltaVector, secondLayerOutput);
@@ -123,6 +123,7 @@ namespace perceptronStaff {
             firstLayerWeights += firstWeightCor;
             secondLayerWeights += secondWeightCor;
             outputLayerWeights += outputWeightCor;
+            return MSE(error);
         }
 
         void feedForward() {
