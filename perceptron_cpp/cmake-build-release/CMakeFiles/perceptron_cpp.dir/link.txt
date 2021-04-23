@@ -1,3 +1,0 @@
-"E:\CLion 2020.3.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\perceptron_cpp.dir/objects.a
-C:\mingw64\bin\ar.exe cr CMakeFiles\perceptron_cpp.dir/objects.a @CMakeFiles\perceptron_cpp.dir\objects1.rsp
-C:\mingw64\bin\g++.exe -O3 -DNDEBUG   -Wl,--whole-archive CMakeFiles\perceptron_cpp.dir/objects.a -Wl,--no-whole-archive  -o perceptron_cpp.exe -Wl,--out-implib,libperceptron_cpp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\perceptron_cpp.dir\linklibs.rsp
