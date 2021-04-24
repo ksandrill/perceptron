@@ -1,3 +1,0 @@
-E:/prog/prac_perceptron/cmake-build-debug/CMakeFiles/prac_perceptron.dir
-E:/prog/prac_perceptron/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/prog/prac_perceptron/cmake-build-debug/CMakeFiles/rebuild_cache.dir

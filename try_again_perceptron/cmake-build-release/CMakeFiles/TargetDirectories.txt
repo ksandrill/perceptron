@@ -1,0 +1,3 @@
+E:/prog/try_again_perceptron/cmake-build-release/CMakeFiles/edit_cache.dir
+E:/prog/try_again_perceptron/cmake-build-release/CMakeFiles/try_again_perceptron.dir
+E:/prog/try_again_perceptron/cmake-build-release/CMakeFiles/rebuild_cache.dir

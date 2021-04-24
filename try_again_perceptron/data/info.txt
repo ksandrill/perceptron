@@ -1,0 +1,9 @@
+train:
+healthy - 118
+unhealthy - 12
+sum - 130
+
+test:
+healthy - 50
+unhealthy - 5
+sum - 55
