@@ -32,7 +32,7 @@ public:
         auto outputSize = layerOutput.size();
         for (auto i = 0; i < outputSize; ++i) {
             float neuroneActivation = sigmoid(layerOutput[i]);
-            layerOutput[i] = std::isnan(neuroneActivation) ? 0.f : neuroneActivation;
+            layerOutput[i] =  neuroneActivation;
 
         }
 

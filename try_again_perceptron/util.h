@@ -15,9 +15,11 @@ inline float mse(const nc::NdArray<float> &error) {
     for (auto i = 0; i < len; ++i) {
         mse += (error[i] * error[i]);
     }
-    mse / len;
+    mse/= len;
     return mse;
 }
 
-
+inline float rMse(const nc::NdArray<float> &error){
+    return nc::sqrt(mse(error));
+}
 #endif //TRY_AGAIN_PERCEPTRON_UTIL_H

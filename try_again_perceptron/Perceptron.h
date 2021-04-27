@@ -44,6 +44,12 @@ public:
 
     }
 
+    void printWeights() {
+        std::cout << firstLayer.getLayerWeights() << std::endl;
+        std::cout << secondLayer.getLayerWeights() << std::endl;
+        std::cout << outputLayer.getLayerWeights() << std::endl;
+    }
+
 
     void initWeights(float low, float high) {
         firstLayer.initWeights(low, high);
@@ -80,16 +86,18 @@ public:
         auto iterations = dataSet.size();
         auto mseVector = nc::zeros<float>({1, epochCount});
         for (auto epoch = 0; epoch < epochCount; ++epoch) {
-            std::cout << "epoch: " << epoch << std::endl;
+            ////std::cout << "epoch: " << epoch << std::endl;
+
             auto avgMse = 0.f;
             for (auto i = 0; i < iterations; ++i) {
                 feedForward(dataSet[i].first);
                 auto error = outputLayer.getLayerOutput() - dataSet[i].second;
+                fixNanError(error);
                 backProp(error, lr);
                 avgMse += mse(error);
 
             }
-            mseVector[epoch] = avgMse/iterations;
+            mseVector[epoch] = avgMse / iterations;
 
 
         }
@@ -97,24 +105,34 @@ public:
     }
 
 
-    DataSet getTestResult(const DataSet &dataSet) {
+    void fixNanError(NdArrayF &error) {
+        for (auto i = 0; i < error.size(); ++i) {
+            error[i] = std::isnan(error[i]) ? 0.f : error[i];
+        }
+
+    }
+
+
+    std::pair<std::vector<NdArrayF>, std::vector<float>> getTestResult(const DataSet &dataSet) {
         auto iterations = dataSet.size();
-        DataSet res{};
-        auto inputSize = inputLayer.size();
-        auto outputSize = outputLayer.getLayerOutput().size();
+        auto errorList = std::vector<NdArrayF>();
+        auto mseError = std::vector<float>();
         for (auto i = 0; i < iterations; ++i) {
+            std::cout << "iter: " << i + 1 << std::endl;
             std::cout << "input: " << dataSet[i].first << " ";
             feedForward(dataSet[i].first);
             std::cout << "output: " << outputLayer.getLayerOutput() << " ";
             std::cout << "real output: " << dataSet[i].second << std::endl;
-            auto aux = Data();
-            aux.first = nc::zeros<float>({1, inputSize});
-            aux.first = dataSet[i].first;
-            aux.second = nc::zeros<float>({1, outputSize});
-            aux.second = outputLayer.getLayerOutput();
-            res.emplace_back(aux);
+            auto error = outputLayer.getLayerOutput() - dataSet[i].second;
+            fixNanError(error);
+            std::cout << "deviation: " << error << std::endl;
+            errorList.emplace_back(error);
+            mseError.emplace_back(mse(error));
         }
-        return res;
+        std::pair<std::vector<NdArrayF>, std::vector<float>> pair{};
+        pair.first = errorList;
+        pair.second = mseError;
+        return pair;
 
 
     }
